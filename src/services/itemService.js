@@ -16,6 +16,11 @@ export const itemService = {
   delete(id) {
     return apiService.delete(`/items/${id}`);
   },
+  getCount(params = {}) {
+    return apiService.get(
+      `/items/count${Object.keys(params).length ? `?${new URLSearchParams(params)}` : ""}`,
+    );
+  },
 };
 
 export default itemService;

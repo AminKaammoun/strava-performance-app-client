@@ -1,8 +1,8 @@
-import BaseCustomStore from "../bases/BaseCustomStore";
+import CountCollection from "../bases/CountCollection";
 import { itemService } from "../../services/itemService";
 import ItemModel from "../../models/ItemModel";
 
-export class ItemCollection extends BaseCustomStore {
+export class ItemCollection extends CountCollection {
   constructor() {
     super(itemService, ItemModel);
   }
@@ -20,6 +20,10 @@ export class ItemCollection extends BaseCustomStore {
 
   async addItem(payload) {
     return this.create(payload);
+  }
+
+  async updateItem(id, payload) {
+    return this.update(id, payload);
   }
 
   async toggleDone(item) {
