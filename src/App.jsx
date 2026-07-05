@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import { Box, CssBaseline } from "@mui/material";
-import ItemsPage from "./pages/ItemsPage";
-import SidebarNav from "./components/SidebarNav";
-import TopBar from "./components/TopBar";
+import ReferenceTablesPage from "./pages/ReferenceTablesPage";
+import SidebarNav from "./components/Sections/SidebarNav";
+import TopBar from "./components/Sections/TopBar";
 import "./App.css";
 
 function HomePage({ toggleTheme, theme }) {
@@ -114,7 +114,7 @@ function App() {
               path="/"
               element={<HomePage toggleTheme={toggleTheme} theme={theme} />}
             />
-            <Route path="/items" element={<ItemsPage />} />
+            <Route path="/items" element={<ReferenceTablesPage />} />
           </Routes>
         </Box>
       </Box>

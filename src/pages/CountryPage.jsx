@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
-import { itemCollection } from "../stores/catalog/ItemCollection";
+import { countryCollection } from "../stores/catalog/CountryCollection";
 import ReferenceList from "../components/ReferenceList";
 import EntityFormDialog from "../components/Utils/EntityFormDialog";
 import { useSnackbar } from "../components/Utils/SnackbarProvider";
 
 const fields = [
   { key: "name", label: "Name", required: true },
-  { key: "description", label: "Description", multiline: true },
-  { key: "done", label: "Done", type: "checkbox" },
+  { key: "isoCode", label: "ISO code", required: true },
 ];
 
-const ItemsPage = observer(() => {
+const CountryPage = observer(() => {
   const { showSuccess, showError } = useSnackbar();
   const [formState, setFormState] = useState({
     open: false,
@@ -20,61 +19,44 @@ const ItemsPage = observer(() => {
   });
 
   useEffect(() => {
-    itemCollection.loadItems();
+    countryCollection.loadCountries();
   }, []);
 
-  const toggleDone = async (item) => {
-    const ok = await itemCollection.toggleDone(item);
-    if (!ok) showError(itemCollection.error);
-  };
-
-  const handleDelete = async (item) => {
-    const ok = await itemCollection.deleteItem(item.id);
-    if (ok) showSuccess("Item deleted.");
-    else showError(itemCollection.error);
+  const handleDelete = async (row) => {
+    const ok = await countryCollection.deleteCountry(row.id);
+    if (ok) showSuccess("Country deleted.");
+    else showError(countryCollection.error);
   };
 
   const handleSubmit = async (values) => {
     const ok =
       formState.mode === "create"
-        ? await itemCollection.addItem(values)
-        : await itemCollection.updateItem(formState.row.id, values);
+        ? await countryCollection.addCountry(values)
+        : await countryCollection.updateCountry(formState.row.id, values);
 
     if (ok) {
       showSuccess(
-        formState.mode === "create" ? "Item added." : "Item updated.",
+        formState.mode === "create" ? "Country added." : "Country updated.",
       );
       setFormState({ open: false, mode: "create", row: null });
     } else {
-      showError(itemCollection.error);
+      showError(countryCollection.error);
     }
   };
 
   const columns = [
-    {
-      key: "done",
-      label: "Done",
-      render: (item) => (
-        <input
-          type="checkbox"
-          checked={item.done}
-          onChange={() => toggleDone(item)}
-        />
-      ),
-      searchValue: () => "",
-    },
     { key: "name", label: "Name" },
-    { key: "description", label: "Description" },
+    { key: "isoCode", label: "ISO code" },
   ];
 
   return (
     <>
       <ReferenceList
-        title="items"
+        title="countries"
         columns={columns}
-        rows={itemCollection.itemsPage.items}
-        loading={itemCollection.loading}
-        error={itemCollection.error}
+        rows={countryCollection.page.items}
+        loading={countryCollection.loading}
+        error={countryCollection.error}
         onAdd={() => setFormState({ open: true, mode: "create", row: null })}
         onEdit={(row) => setFormState({ open: true, mode: "edit", row })}
         onDelete={handleDelete}
@@ -83,7 +65,9 @@ const ItemsPage = observer(() => {
       <EntityFormDialog
         open={formState.open}
         onClose={() => setFormState({ open: false, mode: "create", row: null })}
-        title={formState.mode === "create" ? "Add a new item" : "Edit item"}
+        title={
+          formState.mode === "create" ? "Add a new country" : "Edit country"
+        }
         fields={fields}
         initialValues={formState.row}
         onSubmit={handleSubmit}
@@ -93,4 +77,4 @@ const ItemsPage = observer(() => {
   );
 });
 
-export default ItemsPage;
+export default CountryPage;

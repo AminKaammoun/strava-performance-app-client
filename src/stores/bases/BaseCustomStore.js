@@ -54,8 +54,10 @@ export class BaseCustomStore {
     try {
       await this.service.create(payload);
       await this.loadAll();
+      return true;
     } catch (err) {
       this.setError("Could not create item.");
+      return false;
     }
   }
 
@@ -63,8 +65,10 @@ export class BaseCustomStore {
     try {
       await this.service.update(id, payload);
       await this.loadAll();
+      return true;
     } catch (err) {
       this.setError("Could not update item.");
+      return false;
     }
   }
 
@@ -72,8 +76,10 @@ export class BaseCustomStore {
     try {
       await this.service.delete(id);
       await this.loadAll();
+      return true;
     } catch (err) {
       this.setError("Could not delete item.");
+      return false;
     }
   }
 }
