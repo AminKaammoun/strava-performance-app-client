@@ -29,11 +29,11 @@ function TopBar({ onMenuClick, theme, onThemeToggle }) {
             Development version
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            v0.1 • Strava-ready dashboard prototype
+            v0.1 • Strava Performance Application
           </Typography>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          <Chip label="DEV v0.1" color="primary" variant="outlined" />
+          <Chip label="V0.1" color="primary" variant="outlined" />
           <IconButton onClick={onThemeToggle} color="inherit">
             {theme === "dark" ? <LightMode /> : <DarkMode />}
           </IconButton>
