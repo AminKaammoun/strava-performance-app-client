@@ -18,16 +18,10 @@ export class ShoeCollection extends BaseCustomStore {
     return this.loadAll();
   }
 
-  async addShoe(payload) {
-    return this.create(payload);
-  }
-
+  // Shoes are owned by Strava sync now — only the manual/local fields
+  // (brand, type, purchaseDate, retired, notes) can be edited here.
   async updateShoe(id, payload) {
     return this.update(id, payload);
-  }
-
-  async deleteShoe(id) {
-    return this.delete(id);
   }
 }
 

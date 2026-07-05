@@ -10,6 +10,15 @@ export const stravaService = {
   sync() {
     return apiService.post("/strava/sync");
   },
+  getShoes() {
+    return apiService.get("/strava/shoes");
+  },
+  getShoesSyncStatus() {
+    return apiService.get("/strava/shoes/sync-status");
+  },
+  syncShoes() {
+    return apiService.post("/strava/shoes/sync");
+  },
 };
 
 export default stravaService;
