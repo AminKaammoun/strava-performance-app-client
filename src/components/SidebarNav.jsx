@@ -33,10 +33,7 @@ function SidebarNav({ mobileOpen, onClose, variant = "permanent" }) {
         </Box>
         <Box>
           <Typography variant="h6" sx={{ fontWeight: 700 }}>
-            RunPulse
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Performance studio
+            SPA
           </Typography>
         </Box>
       </Box>
