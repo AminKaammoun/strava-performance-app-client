@@ -8,14 +8,14 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import { DirectionsRun, Home, Storage } from "@mui/icons-material";
+import { DirectionsRun, Dashboard, Storage } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 
 const drawerWidth = 260;
 
 const navItems = [
-  { label: "Home", path: "/", icon: <Home /> },
-  { label: "Reference list", path: "/items", icon: <Storage /> },
+  { label: "Dashboard", path: "/", icon: <Dashboard /> },
+  { label: "Reference tables", path: "/items", icon: <Storage /> },
 ];
 
 function SidebarNav({ mobileOpen, onClose, variant = "permanent" }) {
